@@ -1,17 +1,20 @@
-export default function List(activities) {
-    return(
-        <section className="list"> 
-        
-        <p> placeholder</p>
-        <ul>
-        {activities.map((activity) => {
-        <li key={activity.id}><h3>{activity.activity}</h3></li>    
-        })}
-        
-            
-            
-            </ul>
+export default function List({ activities }) {
+  return (
+    <section className="list">
+      <p> placeholder</p>
+      <ul>
+        {activities.map((activity) => (
+          <ListItem key={activity.id} activity={activity.name} />
+        ))}
+      </ul>
+    </section>
+  );
+}
 
-        </section>
-    )
+function ListItem({ activity }) {
+  return (
+    <li>
+      <h3>{activity}</h3>
+    </li>
+  );
 }
