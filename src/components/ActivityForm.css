@@ -1,0 +1,9 @@
+.activity-form {
+  background-color: beige;
+  padding: 1rem;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
