@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ActivityForm from "./components/ActivityForm/ActivityForm";
 import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
+import List from "./components/List/List";
 
 function App() {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useLocalStorageState("activities",{defaultValue: [{id:1,activity:"test"}]});
   // const [weather, setWeather] = useState();
   // async function weatherFetch() {
   //   const response = await fetch("https://example-apis.vercel.app/api/weather");
@@ -41,8 +43,8 @@ function App() {
 
   return (
     <div className="App">
-      <div>{weather.location}</div>
-      </div>);
+      <List activities={activities}/>
+      
       {/* <div>{weather.location}</div> */}
       <ActivityForm onAddActivity={handleSubmit} />
     </div>
