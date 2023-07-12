@@ -2,8 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  padding: 1rem;
+  width: 80vw;
+  gap: 1rem;
   font-size: 3rem;
-  margin-bottom: -2rem;
+  padding: 0 2rem;
+
+  border-radius: 0 0 10px 10px;
+  background-color: rgba(147, 120, 229, 0.405);
+  box-shadow: 5px 3px 10px gray;
 }
