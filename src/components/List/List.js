@@ -1,4 +1,4 @@
-// Add back in onDeleteActivity
+import "./List.css";
 
 export default function List({ activities, isGoodWeather, onDeleteActivity }) {
   return (
