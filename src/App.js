@@ -18,9 +18,5 @@ function App() {
   return (
     <div className="App">
       <div>{weather.location}</div>
-      <h2>Hello</h2>
-    </div>
-  );
+      </div>);
 }
-
-export default App;
