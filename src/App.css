@@ -1,5 +1,5 @@
 @import "./components/ActivityForm/ActivityForm.css";
-@import "./components/List/List.css";
+/* @import "./components/List/List.css"; */
 @import "./components/WeatherDisplay/WeatherDisplay.css";
 
 .App {
