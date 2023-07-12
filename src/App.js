@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import ActivityForm from "./components/ActivityForm/ActivityForm";
 import { uid } from "uid";
@@ -13,17 +13,18 @@ function App() {
       { id: 3, activity: "test3" },
     ],
   });
-  // const [weather, setWeather] = useState();
-  // async function weatherFetch() {
-  //   const response = await fetch("https://example-apis.vercel.app/api/weather");
-  //   const data = await response.json();
-  //   setWeather(data);
-  //   return data;
-  // }
+  const [weather, setWeather] = useState();
+  const isGoodWeather = weather.isGoodWeather;
+  async function weatherFetch() {
+    const response = await fetch("https://example-apis.vercel.app/api/weather");
+    const data = await response.json();
+    setWeather(data);
+    return data;
+  }
 
-  // useEffect(() => {
-  //   weatherFetch();
-  // }, []);
+  useEffect(() => {
+    weatherFetch();
+  }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -32,7 +33,7 @@ function App() {
 
     const newActivity = {
       name: data.activity,
-      isForGoodWeather: (data.goodWeather = "off"),
+      isForGoodWeather: `${data.goodWeather === "on" ? true : false}`,
     };
     handleAddActivity(newActivity);
 
@@ -49,9 +50,18 @@ function App() {
 
   return (
     <div className="App">
-      <List activities={activities} />
+      <List
+        isGoodWeather={isGoodWeather}
+        activities={
+          isGoodWeather
+            ? activities.filter(
+                (activity) => activity.isForGoodWeather === "true"
+              )
+            : activities.filter((activity) => !activity.isForGoodWeather)
+        }
+      />
 
-      {/* <div>{weather.location}</div> */}
+      <div>{weather.location}</div>
       <ActivityForm onAddActivity={handleSubmit} />
     </div>
   );
