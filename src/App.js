@@ -17,6 +17,14 @@ function App() {
   });
   const [weather, setWeather] = useState([]);
   useEffect(() => {
+    async function weatherFetch() {
+      const response = await fetch(
+        "https://example-apis.vercel.app/api/weather"
+      );
+      const data = await response.json();
+      setWeather(data);
+      return data;
+    }
     try {
       weatherFetch();
     } catch {
@@ -29,15 +37,16 @@ function App() {
         },
       ]);
     }
+
+    const id = setInterval(() => {
+      weatherFetch();
+    }, 5000);
+    return () => {
+      clearInterval(id);
+    };
   }, []);
 
   const isGoodWeather = weather.isGoodWeather;
-  async function weatherFetch() {
-    const response = await fetch("https://example-apis.vercel.app/api/weather");
-    const data = await response.json();
-    setWeather(data);
-    return data;
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
