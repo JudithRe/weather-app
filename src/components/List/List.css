@@ -1,0 +1,35 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list p {
+  font-size: 1.2rem;
+  margin-bottom: -0.5rem;
+}
+
+.list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+.list__item {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: gainsboro;
+  border-radius: 10px;
+  padding: 0 1rem;
+  box-shadow: 2px 3px 5px gray;
+}
+
+.list__item-button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.25rem;
+  box-shadow: 2px 3px 5px gray;
+}
