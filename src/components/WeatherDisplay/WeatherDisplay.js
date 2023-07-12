@@ -1,3 +1,5 @@
+import "./WeatherDisplay.css";
+
 export default function WeatherDisplay({ emoji, temperature, location }) {
   return (
     <>
@@ -7,7 +9,7 @@ export default function WeatherDisplay({ emoji, temperature, location }) {
           <p>{emoji}</p>
         </div>
         <div className="weather-display__temperature">
-          <p>{temperature}</p>
+          <p>{temperature}°C</p>
         </div>
       </div>
     </>
