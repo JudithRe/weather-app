@@ -6,7 +6,6 @@ function App() {
   async function weatherFetch() {
     const response = await fetch("https://example-apis.vercel.app/api/weather");
     const data = await response.json();
-    console.log("data ", data);
     setWeather(data);
     return data;
   }
