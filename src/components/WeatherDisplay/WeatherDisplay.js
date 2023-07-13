@@ -9,7 +9,7 @@ export default function WeatherDisplay({ emoji, temperature, location }) {
           <p>{emoji}</p>
         </div>
         <div className="weather-display__temperature">
-          <p>{temperature}°C</p>
+          <p>{temperature}</p>
         </div>
       </div>
     </>

@@ -9,10 +9,10 @@ import WeatherDisplay from "./components/WeatherDisplay/WeatherDisplay";
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [
-      { id: 1, name: "Play Games 🎮", isForGoodWeather: "false" },
-      { id: 2, name: "Watch TV 📺", isForGoodWeather: "false" },
-      { id: 3, name: "Go to the Beach 🏖️", isForGoodWeather: "true" },
-      { id: 4, name: "Build a Snowman ☃️", isForGoodWeather: "true" },
+      { id: 1, name: "Play Games 🎮", isForGoodWeather: false },
+      { id: 2, name: "Watch TV 📺", isForGoodWeather: false },
+      { id: 3, name: "Go to the Beach 🏖️", isForGoodWeather: true },
+      { id: 4, name: "Build a Snowman ☃️", isForGoodWeather: true },
     ],
   });
   const [weather, setWeather] = useState([]);
@@ -25,18 +25,7 @@ function App() {
       setWeather(data);
       return data;
     }
-    try {
-      weatherFetch();
-    } catch {
-      setWeather([
-        {
-          location: "Europe",
-          temperature: 30,
-          condition: "🌧️",
-          isGoodWeather: false,
-        },
-      ]);
-    }
+    weatherFetch();
 
     const id = setInterval(() => {
       weatherFetch();
@@ -46,27 +35,11 @@ function App() {
     };
   }, []);
 
-  const isGoodWeather = weather.isGoodWeather;
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-
-    const newActivity = {
-      name: data.activity,
-      isForGoodWeather: `${data.goodWeather === "on" ? true : false}`,
-    };
-    handleAddActivity(newActivity);
-
-    event.target.reset();
-    event.target.activity.focus();
-
-    return newActivity;
-  }
+  const isGoodWeather = weather?.isGoodWeather;
 
   function handleAddActivity(newActivity) {
     setActivities([{ id: uid(), ...newActivity }, ...activities]);
+    console.log("new ", newActivity);
   }
 
   function handleDeleteActivity(id) {
@@ -76,23 +49,25 @@ function App() {
   return (
     <div className="App">
       <WeatherDisplay
-        emoji={weather.condition}
-        temperature={weather.temperature}
+        emoji={weather.condition ? weather.condition : "🕑"}
+        temperature={
+          weather.temperature
+            ? `${weather.temperature} °C`
+            : "Loading weather data..."
+        }
       />
       <List
         isGoodWeather={isGoodWeather}
         activities={
           isGoodWeather
-            ? activities.filter(
-                (activity) => activity.isForGoodWeather === "true"
-              )
+            ? activities.filter((activity) => activity.isForGoodWeather)
             : activities.filter(
-                (activity) => activity.isForGoodWeather === "false"
+                (activity) => activity.isForGoodWeather === false
               )
         }
         onDeleteActivity={handleDeleteActivity}
       />
-      <ActivityForm onAddActivity={handleSubmit} />
+      <ActivityForm onAddActivity={handleAddActivity} />
     </div>
   );
 }
